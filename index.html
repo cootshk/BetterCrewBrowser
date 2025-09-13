@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BetterCrewBrowser</title>
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <script src="/dist/socket.io-client@2.4.0.min.js" integrity="sha256-/JZPUHizETjRX7qn3bRo0F1yEnuOtOZj8ZoRZZIu+z8="></script>
+  <script src="scripts/main.js" defer></script>
+</head>
+<body>
+  <template id="lobby-template" class="hidden">
+    <tr id="lobby_{{id}}">
+      <td id="lobby-name_{{id}}">{{name}}</td>
+      <td id="lobby-host_{{id}}">{{host}}</td>
+      <td id="lobby-players_{{id}}">{{players}}</td>
+      <td id="lobby-mods_{{id}}">{{mods}}</td>
+      <td id="lobby-language_{{id}}">{{language}}</td>
+      <td id="lobby-server_{{id}}">{{server}}</td>
+      <td id="lobby-code_{{id}}">{{code}}</td>
+      <td id="lobby-status_{{id}}">{{status}}</td>
+<!--      <td><button></button></td>-->
+    </tr>
+  </template>
+  <h1>BetterCrewBrowser</h1>
+  <table id="lobbies">
+    <thead id="lobbies-head">
+    <tr>
+      <td>Title</td>
+      <td>Host</td>
+      <td>Players</td>
+      <td>Mods</td>
+      <td>Language</td>
+      <td>Server</td>
+      <td>Code</td>
+      <td>Status</td>
+      <!-- join lobby button? -->
+    </tr>
+    <tr id="lobbies-sep"></tr>
+    </thead>
+    <tbody id="lobbies-body"></tbody>
+  </table>
+</body>
+</html>
