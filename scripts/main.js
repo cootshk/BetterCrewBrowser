@@ -132,15 +132,15 @@ let mods;
 let languages;
 let servers;
 Promise.all([
-  fetch("/static/mods.json").then(
+  fetch("static/mods.json").then(
     response => response.json()).then(
     json => { mods = json; }
   ),
-  fetch("/static/languages.json").then(
+  fetch("static/languages.json").then(
     response => response.json()).then(
       json => { languages = json; }
   ),
-  fetch("/static/servers.json").then(
+  fetch("static/servers.json").then(
     response => response.json()).then(
     json => { servers = json; }
   ),
