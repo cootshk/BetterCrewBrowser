@@ -15,8 +15,8 @@
       <td id="lobby-players_{{id}}">{{players}}</td>
       <td id="lobby-mods_{{id}}">{{mods}}</td>
       <td id="lobby-language_{{id}}">{{language}}</td>
-      <td id="lobby-server_{{id}}">{{server}}</td>
-      <td id="lobby-code_{{id}}">{{code}}</td>
+      <td class="hidden" id="lobby-server_{{id}}">{{server}}</td> <!-- BCL doesn't send this one anymore. -->
+      <td id="lobby-code_{{id}}" onclick="onClickCode('{{id}}')">{{code}}</td>
       <td id="lobby-status_{{id}}">{{status}}</td>
 <!--      <td><button></button></td>-->
     </tr>
@@ -30,7 +30,7 @@
       <td>Players</td>
       <td>Mods</td>
       <td>Language</td>
-      <td>Server</td>
+      <td class="hidden">Server</td>
       <td>Code</td>
       <td>Status</td>
       <!-- join lobby button? -->

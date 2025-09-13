@@ -21,3 +21,6 @@ button {
   position: absolute;
   top: 0;
 }
+.hidden {
+  display: none;
+}

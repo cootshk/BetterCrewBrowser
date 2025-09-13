@@ -4,7 +4,8 @@ function $(id) { return document.getElementById(id); }
 const lobbyTableBody = $('lobbies-body')
 const lobbyTableTemplate = $('lobby-template')
 
-var lobbyCodeIds = {}
+const lobbyCodeIds = {};
+const lobbyTimers = {};
 
 socket.on('update_lobby', lobby => {
   console.log("Updating lobby...");
@@ -40,6 +41,12 @@ socket.on('remove_lobby', lobby => {
 
 // Formats
 function formatLobby(lobby) {
+  if (lobbyTimers[lobby.id]) {
+    clearInterval(lobbyTimers[lobby.id]);
+  }
+  lobbyTimers[lobby.id] = setInterval(() => {
+    $(`lobby-status_${lobby.id}`).innerHTML = formatStatus(lobby);
+  }, 1)
   return lobbyTableTemplate.innerHTML.replaceAll(
     "{{id}}", lobby.id).replace(
     "{{name}}", lobby.title).replace(
@@ -47,9 +54,9 @@ function formatLobby(lobby) {
     "{{players}}", `${lobby.current_players}/${lobby.max_players}`).replace(
     "{{mods}}", formatMods(lobby.mods)).replace(
     "{{language}}", languages[lobby.language] ?? "Unknown").replace(
-    "{{server}}", (lobbyCodeIds[lobby.id] ?? [])[0] ?? "Loading...").replace( // handled above
-    "{{code}}", (lobbyCodeIds[lobby.id] ?? [])[1] ?? "Loading...").replace(
-    "{{status}}", lobby.gameState
+    "{{server}}", (lobbyCodeIds[lobby.id] ?? [])[0] ?? (lobby.gameState === 0 ? "Loading..." : "In game!")).replace( // handled above
+    "{{code}}", (lobbyCodeIds[lobby.id] ?? [])[1] ?? (lobby.gameState === 0 ? "Loading..." : "In game!")).replace(
+    "{{status}}", formatStatus(lobby)
   );
 }
 function formatMods(lobbyName) {
@@ -96,6 +103,28 @@ function assignLobbyCode(lobby) {
       }
     })
 }
+function formatStatus(lobby) {
+  let message;
+  switch (lobby.gameState) {
+    case 0:
+      message = "Lobby";
+      break;
+    case 1:
+      message = "Game";
+      break;
+    case 2:
+      message = "Meeting";
+      break;
+    case 3:
+      message = "Menu";
+      break;
+    default:
+      message = "Unknown";
+      break;
+  }
+  const time = Math.floor((new Date() - new Date(lobby.stateTime)) / 1000);
+  return `${message} ${Math.floor(time/60)}:${(time%60)<10?0:""}${time%60}`;
+}
 
 
 // Load resources
@@ -115,6 +144,13 @@ Promise.all([
     response => response.json()).then(
     json => { servers = json; }
   ),
-]).then(() =>
-  socket.emit("lobbybrowser", true) // connect to the socket
-)
+]).then(() => {
+  socket.emit("bettercrewbrowser", true);
+  socket.emit("lobbybrowser", true); // connect to the socket
+});
+
+function onClickCode(id) {
+  if (lobbyCodeIds[id]) {
+    navigator.clipboard.writeText(lobbyCodeIds[id][1]).catch((err) => {});
+  }
+}
