@@ -36,6 +36,10 @@ socket.on('new_lobbies', lobbies => {
 socket.on('remove_lobby', lobby => {
   console.log("Removed lobby...");
   $(`lobby_${lobby.id}`)?.remove();
+  $(`lobby-spacer_${lobby.id}`)?.remove();
+  lobbyCodeIds[lobby.id] = null;
+  clearInterval(lobbyTimers[lobby.id]);
+  lobbyTimers[lobby.id] = null;
   console.log(lobby);
 })
 

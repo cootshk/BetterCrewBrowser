@@ -9,7 +9,7 @@
 </head>
 <body>
   <template id="lobby-template" class="hidden">
-    <tr id="lobby_{{id}}">
+    <tr class="lobby" id="lobby_{{id}}">
       <td id="lobby-name_{{id}}">{{name}}</td>
       <td id="lobby-host_{{id}}">{{host}}</td>
       <td id="lobby-players_{{id}}">{{players}}</td>
@@ -18,26 +18,31 @@
       <td class="hidden" id="lobby-server_{{id}}">{{server}}</td> <!-- BCL doesn't send this one anymore. -->
       <td id="lobby-code_{{id}}" onclick="onClickCode('{{id}}')">{{code}}</td>
       <td id="lobby-status_{{id}}">{{status}}</td>
-<!--      <td><button></button></td>-->
+<!--      <td><button>Join</button></td>-->
     </tr>
+    <div class="lobby-spacer" id="lobby-spacer_{{id}}"></div>
   </template>
-  <h1>BetterCrewBrowser</h1>
-  <table id="lobbies">
-    <thead id="lobbies-head">
-    <tr>
-      <td>Title</td>
-      <td>Host</td>
-      <td>Players</td>
-      <td>Mods</td>
-      <td>Language</td>
-      <td class="hidden">Server</td>
-      <td>Code</td>
-      <td>Status</td>
-      <!-- join lobby button? -->
-    </tr>
-    <tr id="lobbies-sep"></tr>
-    </thead>
-    <tbody id="lobbies-body"></tbody>
-  </table>
+<!--  <h1>BetterCrewBrowser</h1>-->
+  <div id="lobbies-container">
+    <table id="lobbies">
+      <thead id="lobbies-head">
+      <tr class="hidden" id="lobbies-head-sep"></tr>
+      <tr>
+        <td>Title</td>
+        <td>Host</td>
+        <td>Players</td>
+        <td>Mods</td>
+        <td>Language</td>
+        <td class="hidden">Server</td>
+        <td>Code</td>
+        <td>Status</td>
+        <!-- join lobby button? -->
+      </tr>
+      <tr id="lobbies-sep"></tr>
+      </thead>
+      <tbody id="lobbies-body"></tbody>
+    </table>
+  </div>
+  <div></div>
 </body>
 </html>

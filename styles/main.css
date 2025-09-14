@@ -7,14 +7,24 @@ body {
   overflow: hidden;
 
 }
-table {
-  '&:nth-of-type(odd)': {
-    background-color: #25232a;
-  },
-  '&:nth-of-type(even)': {
-    background-color: #1d1a23;
-  },
+/*thead {*/
+/*  background-color: #25232a;*/
+/*}*/
+/*tbody {*/
+tr {
+
 }
+tr:nth-of-type(odd) {
+  background-color: #1d1a23;
+}
+tr:nth-of-type(even) {
+  background-color: #25232a;
+}
+td {
+  padding: clamp(20px, 3vh, 25px) 2vw;
+  padding-left: 0.5vw !important;
+}
+/*}*/
 button {
   margin-left: 0;
   padding: 0;
@@ -23,4 +33,18 @@ button {
 }
 .hidden {
   display: none;
+}
+
+#lobbies-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#lobbies {
+  min-width: 100vw;
+  padding: 2vh 5vw;
+}
+.lobby {
+  border-top: 1px gray;
 }
