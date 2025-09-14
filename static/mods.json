@@ -1,4 +1,10 @@
 {
   "NONE": "None",
-  "TOWN_OF_US_MIRA": "Town of Us: Mira"
+  "TOWN_OF_US": "Town of Us",
+  "TOWN_OF_US_MIRA": "Town of Us: Mira",
+  "TOWN_OS_US_R": "Town of Us: Reactivated",
+  "THE_OTHER_ROLES": "The Other Roles",
+  "TOWN_OF_HOSTS": "Town of Hosts",
+  "LAS_MONJAS": "Las Monjas",
+  "OTHER": "Other"
 }
